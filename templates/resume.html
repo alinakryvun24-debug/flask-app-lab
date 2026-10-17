@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow-sm p-4">
+    <header class="row align-items-center mb-4 border-bottom pb-3">
+        <div class="col-md-3 text-center">
+            <img src="{{ url_for('static', filename='images/avatar.png.jpg') }}" alt="Фото профілю" class="img-fluid rounded-circle profile-img">
+        </div>
+        <div class="col-md-9">
+            <h1 class="display-5">Аліна Кривун</h1>
+            <p class="lead text-muted">Студентка IT / Інженерія програмного забезпечення</p>
+        </div>
+    </header>
+
+    <section class="mb-4">
+        <h2>Про себе</h2>
+        <p>Навчаюся на спеціальності «Інженерія програмного забезпечення».</p>
+    </section>
+
+    <section class="mb-4">
+        <h2>Освіта</h2>
+        <p><strong>Бакалавр:</strong> Інженерія програмного забезпечення (2023 – дотепер)</p>
+    </section>
+
+    <section class="mb-4">
+        <h2>Навички</h2>
+        <ul>
+            <li>Розробка веб-додатків на Python (Flask) та PHP</li>
+            <li>Робота з Git, GitHub, VS Code, Eclips</li>
+        </ul>
+    </section>
+
+    <section class="mb-4">
+        <h2>Технології</h2>
+        <span class="badge bg-primary">Python</span>
+        <span class="badge bg-secondary">Flask</span>
+        <span class="badge bg-success">JavaScript</span>
+        <span class="badge bg-danger">HTML/CSS</span>
+        <span class="badge bg-warning text-dark">Git</span>
+    </section>
+
+    <section>
+        <h2>Досвід роботи / Проєкти</h2>
+        <ul>
+            <li><strong>Petohub:</strong> Веб-платформа для віртуального зоомагазину.</li>
+            <li><strong>HobbyKit:</strong> Концепт та бізнес-модель сервісу оренди наборів для хобі.</li>
+        </ul>
+    </section>
+</div>
+{% endblock %}
