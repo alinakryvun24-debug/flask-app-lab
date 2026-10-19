@@ -1,10 +1,10 @@
-import os
 from flask import Flask
 
-template_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
-
-app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
-
+app = Flask('app')
 
 from app import views
+from app.users import users_bp
+from app.products import products_bp
+
+app.register_blueprint(users_bp, url_prefix='/users')
+app.register_blueprint(products_bp, url_prefix='/products')
