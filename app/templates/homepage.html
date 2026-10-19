@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card shadow-sm p-4 text-center">
+    <h1 class="display-4">Ласкаво просимо на головну сторінку!</h1>
+    <p class="lead text-muted mt-3">Це домашня сторінка веб-додатка Flask.</p>
+    
+    {% if agent %}
+    <div class="alert alert-info mt-4">
+        <strong>Ваш User-Agent:</strong> {{ agent }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
