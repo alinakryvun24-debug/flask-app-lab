@@ -1,5 +1,5 @@
 from flask import render_template, abort
-from app.products import products_bp
+from . import products_bp
 
 products_data = [
     {
