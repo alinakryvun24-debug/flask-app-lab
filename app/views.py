@@ -2,7 +2,6 @@ import logging
 from pathlib import Path
 
 from flask import render_template, request, flash, redirect, url_for
-from app import app
 from app.forms import ContactForm
 
 
@@ -20,41 +19,49 @@ if not contact_logger.handlers:
     contact_logger.addHandler(file_handler)
 
 
-@app.route('/')
-@app.route('/resume')
-def resume():
-    return render_template('resume.html', title='Резюме')
+def register_routes(app):
+    @app.route('/')
+    @app.route('/resume')
+    def resume():
+        return render_template('resume.html', title='Резюме')
 
+    @app.route('/contact', methods=['GET', 'POST'])
+    @app.route('/contacts', methods=['GET', 'POST'])
+    def contacts():
+        form = ContactForm()
 
-@app.route('/contact', methods=['GET', 'POST'])
-@app.route('/contacts', methods=['GET', 'POST'])
-def contacts():
-    form = ContactForm()
+        if form.validate_on_submit():
+            contact_logger.info(
+                "Ім'я: %s | Email: %s | Телефон: %s | "
+                "Тема: %s | Повідомлення: %s",
+                form.name.data,
+                form.email.data,
+                form.phone.data,
+                form.subject.data,
+                form.message.data
+            )
 
-    if form.validate_on_submit():
-        contact_logger.info(
-    "Ім'я: %s | Email: %s | Телефон: %s | Тема: %s | Повідомлення: %s",
-    form.name.data,
-    form.email.data,
-    form.phone.data,
-    form.subject.data,
-    form.message.data
-)
+            flash('Ваше повідомлення успішно надіслано!', 'success')
+            return redirect(url_for('contacts'))
 
-        flash('Ваше повідомлення успішно надіслано!', 'success')
-        return redirect(url_for('contacts'))
+        if request.method == 'POST':
+            flash(
+                'Не вдалося надіслати повідомлення. '
+                'Перевірте правильність заповнення форми.',
+                'danger'
+            )
 
-    if request.method == 'POST':
-        flash('Не вдалося надіслати повідомлення. Перевірте правильність заповнення форми.', 'danger')
+        return render_template(
+            'contacts.html',
+            title='Контакти',
+            form=form
+        )
 
-    return render_template(
-        'contacts.html',
-        title='Контакти',
-        form=form
-    )
-
-
-@app.route('/homepage')
-def home():
-    agent = request.user_agent
-    return render_template('homepage.html', title='Головна', agent=agent)
+    @app.route('/homepage')
+    def home():
+        agent = request.user_agent
+        return render_template(
+            'homepage.html',
+            title='Головна',
+            agent=agent
+        )

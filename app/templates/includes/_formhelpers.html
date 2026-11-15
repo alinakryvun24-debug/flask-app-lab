@@ -1,21 +1,26 @@
 {% macro render_field(field) %}
 <div class="mb-3">
-    {{ field.label(class="form-label") }}
-
-    {% if field.type == 'TextAreaField' %}
-        {{ field(class="form-control", rows=4) }}
-    {% elif field.type == 'SelectField' %}
-        {{ field(class="form-select") }}
+    {% if field.type == 'BooleanField' %}
+        <div class="form-check">
+            {{ field(class="form-check-input") }}
+            {{ field.label(class="form-check-label") }}
+        </div>
     {% else %}
-        {{ field(class="form-control") }}
+        {{ field.label(class="form-label") }}
+
+        {% if field.type == 'TextAreaField' %}
+            {{ field(class="form-control", rows=4) }}
+        {% elif field.type == 'SelectField' %}
+            {{ field(class="form-select") }}
+        {% else %}
+            {{ field(class="form-control") }}
+        {% endif %}
     {% endif %}
 
-    {% if field.errors %}
-        {% for error in field.errors %}
-            <div class="text-danger small mt-1">
-                {{ error }}
-            </div>
-        {% endfor %}
-    {% endif %}
+    {% for error in field.errors %}
+        <div class="text-danger small mt-1">
+            {{ error }}
+        </div>
+    {% endfor %}
 </div>
 {% endmacro %}

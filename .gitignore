@@ -6,3 +6,6 @@ __pycache__/
 contact_messages.log
 data/products.json
 app/products/static/uploads/*
+
+.env
+instance/
