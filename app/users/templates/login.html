@@ -1,0 +1,51 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Вхід у систему</h2>
+
+                    <form method="POST" action="{{ url_for('users.login') }}">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Ім'я користувача</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="username"
+                                name="username"
+                                placeholder="Введіть логін"
+                                required
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Пароль</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                placeholder="Введіть пароль"
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100">
+                            Увійти
+                        </button>
+                    </form>
+
+                    <p class="text-muted text-center mt-3 mb-0">
+                        Тестовий логін: admin<br>
+                        Пароль: 12345
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
