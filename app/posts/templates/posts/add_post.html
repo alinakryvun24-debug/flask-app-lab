@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% from 'includes/_formhelpers.html' import render_field %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="mb-4">{{ title }}</h1>
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            {% for error in form.csrf_token.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+
+            {{ render_field(form.title) }}
+            {{ render_field(form.content) }}
+            {{ render_field(form.enabled) }}
+            {{ render_field(form.publish_date) }}
+            {{ render_field(form.category) }}
+
+            {{ form.submit(class="btn btn-primary") }}
+
+            <a href="{{ url_for('posts.all_posts') }}"
+               class="btn btn-secondary">
+                До списку
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}
