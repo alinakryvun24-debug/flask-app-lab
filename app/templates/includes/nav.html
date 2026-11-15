@@ -1,9 +1,21 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="{{ url_for('resume') }}">Аліна Кривун</a>
-    <div class="navbar-nav">
-      <a class="nav-link" href="{{ url_for('resume') }}">Резюме</a>
-      <a class="nav-link" href="{{ url_for('contacts') }}">Контакти</a>
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('home') }}">Аліна Кривун</a>
+
+        <div class="navbar-nav">
+            <a class="nav-link" href="{{ url_for('home') }}">Головна</a>
+            <a class="nav-link" href="{{ url_for('resume') }}">Резюме</a>
+            <a class="nav-link" href="{{ url_for('contacts') }}">Контакти</a>
+
+            {% if session.get('username') %}
+                <a class="nav-link" href="{{ url_for('users.profile') }}">Профіль</a>
+                <form action="{{ url_for('users.logout') }}" method="POST" class="d-inline">
+                    <button type="submit" class="nav-link border-0 bg-transparent">Вийти</button>
+                </form>
+            {% else %}
+                <a class="nav-link" href="{{ url_for('users.login') }}">Увійти</a>
+            {% endif %}
+        </div>
     </div>
-  </div>
 </nav>

@@ -1,6 +1,7 @@
 from flask import Flask
 
 app = Flask('app')
+app.secret_key = 'my_secret_key'
 
 from . import views
 from .users import users_bp
