@@ -2,3 +2,7 @@ venv/
 .venv/
 __pycache__/
 *.pyc
+
+contact_messages.log
+data/products.json
+app/products/static/uploads/*
